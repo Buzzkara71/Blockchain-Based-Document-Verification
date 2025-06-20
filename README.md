@@ -1,7 +1,7 @@
 This project will help someone to verify their document based on hash that created by using Ethereum (Sepolia) network blockchain technology. This project still under development, feel free to leave a comment / review 🐳. 
 
 ## Getting Started
-
+Before we started i'd like to inform you that i use Hardhat for deployment testing. You can learn more the docs from their official docs [HERE] (https://hardhat.org/hardhat-runner/docs/getting-started)
 Install the depedencies:
 
 ```bash
@@ -10,31 +10,34 @@ npm install
 
 ```
 
-## Local Environment
+## Local Environment Setup
 
-⚠️ PLEASE BE IN MIND, DONT SHARE YOUR EVERY INFORMATION HERE IN PUBLIC BECAUSE IT CONTAINS A CRUCIAL INFORMATION ⚠️
+## ⚠️ PLEASE BE IN MIND, DONT SHARE YOUR EVERY INFORMATION HERE IN PUBLIC BECAUSE IT CONTAINS A CRUCIAL INFORMATION ⚠️
 
-Fill the `.env.local` with your own secret code. This section is for local testing purpose.
+➤➤➤ Fill the `.env.local` with your own secret code. This section is for local testing purpose.
 
-(Can be obtained from MongoDB Atlas)
+**(Can be obtained from MongoDB Atlas)**
+
 MONGODB_URI="INPUT YOUR MONGODB_URI HERE"
 
-Google Auth (Can be obtained from Google Cloud Console)
+**Google Auth (Can be obtained from Google Cloud Console)**
+
 GOOGLE_CLIENT_ID="INPUT YOUR GOOGLE_CLIENT_ID HERE"
 GOOGLE_CLIENT_SECRET="INPUT YOUR GOOGLE_CLIENT_SECRET HERE"
 
-NextAuth.js
-NEXTAUTH_SECRET="INPUT YOUR NEXTAUTH_SECRET HERE" 
-
-Generate the secret code by input this command in bash (not terminal):
+**Generate the secret code by input this command in bash (not terminal):**
 
 ``` bash
 
 openssl rand -base64 32
 
-``` 
+```
 
-(Can be obtained from Alchemy/Infura)
+NextAuth.js
+NEXTAUTH_SECRET="INPUT YOUR NEXTAUTH_SECRET HERE" 
+
+**(Can be obtained from Alchemy/Infura)**
+
 NEXT_PUBLIC_SEPOLIA_RPC_URL="INPUT YOUR RPC URL HERE"
 PRIVATE_KEY="INPUT YOUR PRIVATE KEY HERE" # DONT USE YOUR MAIN PRIVATE KEY
 
@@ -56,3 +59,7 @@ This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-appl
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+
+That's all. Wish i can graduate sooner and get some jobs. Thanks
+
+<img align="center" width="400" src="https://tenor.com/view/hatsune-miku-miku-hatsune-miku-hatsune-washing-machine-gif-4863029126409914383">

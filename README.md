@@ -1,37 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+This project will help someone to verify their document based on hash that created by using Ethereum (Sepolia) network blockchain technology. This project still under development, feel free to leave a comment / review 🐳. 
 
 ## Getting Started
 
-First, run the development server:
+Install the depedencies:
 
 ```bash
+
+npm install
+
+```
+
+## Local Environment
+
+⚠️ PLEASE BE IN MIND, DONT SHARE YOUR EVERY INFORMATION HERE IN PUBLIC BECAUSE IT CONTAINS A CRUCIAL INFORMATION ⚠️
+
+Fill the `.env.local` with your own secret code. This section is for local testing purpose.
+
+(Can be obtained from MongoDB Atlas)
+MONGODB_URI="INPUT YOUR MONGODB_URI HERE"
+
+Google Auth (Can be obtained from Google Cloud Console)
+GOOGLE_CLIENT_ID="INPUT YOUR GOOGLE_CLIENT_ID HERE"
+GOOGLE_CLIENT_SECRET="INPUT YOUR GOOGLE_CLIENT_SECRET HERE"
+
+NextAuth.js
+NEXTAUTH_SECRET="INPUT YOUR NEXTAUTH_SECRET HERE" 
+
+Generate the secret code by input this command in bash (not terminal):
+
+``` bash
+
+openssl rand -base64 32
+
+``` 
+
+(Can be obtained from Alchemy/Infura)
+NEXT_PUBLIC_SEPOLIA_RPC_URL="INPUT YOUR RPC URL HERE"
+PRIVATE_KEY="INPUT YOUR PRIVATE KEY HERE" # DONT USE YOUR MAIN PRIVATE KEY
+
+## Start The Project
+```bash
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
 
 This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
 ## Deploy on Vercel
 

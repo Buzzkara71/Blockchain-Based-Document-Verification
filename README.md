@@ -1,7 +1,8 @@
 This project will help someone to verify their document based on hash that created by using Ethereum (Sepolia) network blockchain technology. This project still under development, feel free to leave a comment / review 🐳. 
 
 ## Getting Started
-Before we started i'd like to inform you that i use Hardhat for deployment testing. You can learn more the docs from their official docs [HERE] (https://hardhat.org/hardhat-runner/docs/getting-started)
+Before we started i'd like to inform you that i use Hardhat for deployment testing. You can learn more the docs from their official docs [Here](https://hardhat.org/hardhat-runner/docs/getting-started)
+
 Install the depedencies:
 
 ```bash
@@ -60,6 +61,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
 
-That's all. Wish i can graduate sooner and get some jobs. Thanks
+That's all. Wish i can graduated sooner and get some jobs. Thanks 👨‍💼
 
-<img align="center" width="400" src="https://tenor.com/view/hatsune-miku-miku-hatsune-miku-hatsune-washing-machine-gif-4863029126409914383">
+<img src="https://tenor.com/view/hatsune-miku-miku-hatsune-miku-hatsune-washing-machine-gif-4863029126409914383" width="200">

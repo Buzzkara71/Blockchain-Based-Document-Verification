@@ -9,9 +9,16 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+/blockchain/node_modules
 
 # testing
 /coverage
+
+# Local Environment Variables
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
 
 # next.js
 /.next/
@@ -39,3 +46,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Hardhat cache and artifacts
+/blockchain/cache
+/blockchain/artifacts

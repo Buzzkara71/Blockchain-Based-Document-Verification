@@ -2,65 +2,167 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { useSession, signIn } from 'next-auth/react';
-import { useWallet } from '../../lib/WalletContext';
-import { ShieldCheck, LogIn, Link as LinkIcon, AlertTriangle, ChevronDown } from 'lucide-react';
+import { BookOpenCheck, LogIn, Menu, X } from 'lucide-react';
 import LoginModal from '../LoginModal';
-import LogoutButton from './LogoutButton';
+import UserMenuModal from '../UserMenuModal';
 
 export default function Navbar() {
   const { data: session, status } = useSession();
-  const { walletAddress, isWalletVerified, connectWallet, verifySignature } = useWallet();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isUserMenuModalOpen, setIsUserMenuModalOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const UserMenu = () => (
-    <div className="relative group">
-      <div className="flex items-center gap-2 cursor-pointer p-1">
-        <Image src={session.user.image} alt="User Avatar" width={36} height={36} className="rounded-full border-2 border-slate-600 group-hover:border-cyan-400"/>
-        <ChevronDown className="w-4 h-4 text-slate-300 group-hover:rotate-180 transition-transform" />
-      </div>
-      <div className="absolute right-0 mt-2 w-72 bg-slate-800 border border-slate-700 rounded-xl shadow-2xl p-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto">
-        <div className="px-3 py-2 border-b border-slate-700">
-          <p className="font-semibold text-sm text-slate-100">{session.user.name}</p>
-          <p className="text-xs text-slate-400">{session.user.email}</p>
-        </div>
-        <div className="p-1 mt-1">
-          <p className="px-2 pt-1 pb-2 text-xs font-semibold text-slate-500 uppercase">Aksi Dompet</p>
-          {!walletAddress ? (
-            <button onClick={connectWallet} className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-slate-200 rounded-md hover:bg-slate-700">
-              <LinkIcon className="w-4 h-4" /> Hubungkan Dompet
-            </button>
-          ) : !isWalletVerified ? (
-            <button onClick={verifySignature} className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-yellow-300 rounded-md hover:bg-slate-700 animate-pulse">
-              <AlertTriangle className="w-4 h-4" /> Verifikasi Dompet
-            </button>
-          ) : (
-            <div className="px-3 py-2 text-sm text-green-300 rounded-md font-mono flex items-center gap-2" title={walletAddress}>
-              <ShieldCheck className="w-4 h-4" />
-              <span>{`${walletAddress.substring(0, 6)}...${walletAddress.substring(38)}`}</span>
-            </div>
-          )}
-        </div>
-        <div className="border-t border-slate-700 mt-1 p-1"><LogoutButton /></div>
-      </div>
-    </div>
+  // User Avatar Button
+  const UserAvatarButton = () => (
+    <button onClick={() => setIsUserMenuModalOpen(true)} className="cursor-pointer">
+      <Image 
+        src={session.user.image} 
+        alt="User Avatar" 
+        width={32} 
+        height={32} 
+        className="rounded-full border-2 border-slate-600 hover:border-cyan-400 transition-colors"
+      />
+    </button>
   );
 
   return (
     <>
-      <header className="bg-slate-900/50 shadow-md sticky top-0 z-50 backdrop-blur-lg border-b border-slate-700/50">
-        <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
-          <div className="flex items-center gap-6">
-            <Link href="/" className="flex items-center gap-2 text-xl font-bold text-white"><ShieldCheck className="w-7 h-7 text-cyan-400" /><span>DocuChain</span></Link>
-            <div className="hidden md:flex items-center gap-6 border-l border-slate-700 pl-6"><Link href="/audit" className="text-sm font-medium text-slate-300 hover:text-white">Log Audit</Link></div>
+      <header className="bg-slate-900/80 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-slate-700/50">
+        <nav className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex justify-between items-center">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-3 text-xl font-bold text-white hover:text-cyan-400 transition-colors">
+              <BookOpenCheck className="w-7 h-7 text-cyan-400" />
+              <span>DocVerify</span>
+            </Link>
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-8">
+              <Link href="/verify" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
+                Verifikasi
+              </Link>
+              <Link href="/how-it-works" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
+                Cara Kerja
+              </Link>
+              <Link href="/audit" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
+                Log Audit
+              </Link>
+            </div>
+            
+            {/* User Actions */}
+            <div className="flex items-center gap-4">
+              {/* Desktop User Section */}
+              <div className="hidden md:flex items-center">
+                {status === 'loading' && (
+                  <div className="text-sm text-slate-400">Loading...</div>
+                )}
+                
+                {session ? (
+                  <UserAvatarButton />
+                ) : (
+                  status !== 'loading' && (
+                    <button 
+                      onClick={() => setIsLoginModalOpen(true)} 
+                      className="btn-secondary text-xs px-4 py-2"
+                    >
+                      <LogIn className="w-4 h-4 mr-2" />
+                      Masuk
+                    </button>
+                  )
+                )}
+              </div>
+
+              {/* Mobile Menu Button */}
+              <button 
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="md:hidden p-2 text-slate-300 hover:text-white transition-colors"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
+              </button>
+            </div>
           </div>
-          <div className="flex items-center">
-            {status === 'loading' ? (<div className="text-sm text-slate-400">Loading...</div>)
-            : session ? (<UserMenu />) 
-            : (<button onClick={() => setIsLoginModalOpen(true)} className="flex items-center gap-2 px-4 py-2 text-sm font-semibold bg-slate-100 text-slate-800 rounded-lg hover:bg-white"><LogIn className="w-4 h-4" /> Sign In</button>)}
-          </div>
+
+          {/* Mobile Menu */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden mt-4 pb-4 border-t border-slate-700">
+              <div className="flex flex-col gap-4 pt-4">
+                <Link 
+                  href="/verify" 
+                  className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Verifikasi
+                </Link>
+                <Link 
+                  href="/how-it-works" 
+                  className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Cara Kerja
+                </Link>
+                <Link 
+                  href="/audit" 
+                  className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Log Audit
+                </Link>
+                
+                {/* Mobile User Section */}
+                <div className="pt-4 border-t border-slate-700">
+                  {session ? (
+                    <div className="flex items-center gap-3">
+                      <Image 
+                        src={session.user.image} 
+                        alt="User Avatar" 
+                        width={24} 
+                        height={24} 
+                        className="rounded-full"
+                      />
+                      <button 
+                        onClick={() => {
+                          setIsUserMenuModalOpen(true);
+                          setIsMobileMenuOpen(false);
+                        }}
+                        className="text-sm text-slate-300"
+                      >
+                        {session.user.name}
+                      </button>
+                    </div>
+                  ) : (
+                    status !== 'loading' && (
+                      <button 
+                        onClick={() => {
+                          setIsLoginModalOpen(true);
+                          setIsMobileMenuOpen(false);
+                        }}
+                        className="btn-secondary text-xs px-4 py-2 w-full justify-center"
+                      >
+                        <LogIn className="w-4 h-4 mr-2" />
+                        Masuk
+                      </button>
+                    )
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
         </nav>
       </header>
-      <LoginModal isOpen={isLoginModalOpen} onRequestClose={() => setIsLoginModalOpen(false)} />
+      
+      {/* Modals */}
+      <LoginModal 
+        isOpen={isLoginModalOpen} 
+        onRequestClose={() => setIsLoginModalOpen(false)} 
+      />
+      <UserMenuModal
+        isOpen={isUserMenuModalOpen}
+        onRequestClose={() => setIsUserMenuModalOpen(false)}
+      />
     </>
   );
 }
